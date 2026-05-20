@@ -7,7 +7,7 @@ export default function ChallengeSelect({ quizData, answered, onSelect }) {
   return (
     <div className="max-w-4xl mx-auto px-6 py-8">
 
-      <h1 className="text-xl font-black text-slate-900 mb-1">Start The Challenge</h1>
+      <h1 className="text-xl font-black text-slate-900 mb-1">Start The Challenge!</h1>
       <p className="text-xs text-slate-500 mb-4">
         Find all anomalies as fast as possible!
       </p>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, CheckCircle2, XCircle } from "lucide-react";
+import { Search, CheckCircle2 } from "lucide-react";
 
 export default function QuizCard({ question, questionNumber, total, onAnswer }) {
   const [selected, setSelected] = useState(null);
@@ -21,13 +21,6 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
     setConfirming(false);
   };
 
-  const difficulty = questionNumber <= 3 ? "EASY" : questionNumber <= 7 ? "MEDIUM" : "HARD";
-  const diffColor = questionNumber <= 3
-    ? "bg-green-100 text-green-700"
-    : questionNumber <= 7
-    ? "bg-amber-100 text-amber-700"
-    : "bg-red-100 text-red-600";
-
   return (
     <div className="max-w-3xl mx-auto px-6 py-8">
 
@@ -39,9 +32,6 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
             {question.topic || "Audit Scenario"}
           </p>
         </div>
-        <span className={`ml-auto text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full ${diffColor}`}>
-          {difficulty}
-        </span>
       </div>
 
       {/* Scenario context */}
@@ -105,10 +95,6 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
               <CheckCircle2 size={28} className="text-amber-500" strokeWidth={1.5} />
             </div>
             <h3 className="text-base font-black text-slate-900 mb-2">Confirm Answer</h3>
-            <p className="text-xs text-slate-500 mb-1">You selected:</p>
-            <p className="text-sm font-semibold text-slate-800 mb-6 px-2">
-              "{question.options[selected]}"
-            </p>
             <p className="text-xs text-slate-400 mb-6">
               Are you sure? You cannot change your answer after confirming.
             </p>

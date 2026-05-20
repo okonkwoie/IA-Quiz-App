@@ -2,16 +2,16 @@ export const quizData = [
   {
     id: 1,
     category: "Procurement",
-    scenario: `A Purchase Order for drilling chemicals was raised on March 15 for ₦42,000,000. The Goods Received Note is dated March 10 — five days before the PO was issued. The invoice arrived March 20 and was approved the same day by the same officer who raised the PO.`,
+    scenario: `A Purchase Order for drilling chemicals was raised on March 15 for ₦42,000,000. The Goods Receipt Note is dated March 10, five days before the PO was issued. The invoice arrived March 20 and was approved the same day by the same officer who raised the PO.`,
     question: "How many anomalies can you spot in this scenario?",
     options: [
-      "One — the self-approval of the invoice",
-      "Two — GRN predates PO, and self-approval",
-      "Three — GRN predates PO, self-approval, and same-day approval",
-      "No anomalies — this is standard practice"
+      "The self-approval of the invoice",
+      "Goods Receipt Note predates Purchase Order, and self-approval",
+      "Goods Receipt Note predates Purchase Order, self-approval, and same-day approval",
+      "No anomalies, this is standard practice"
     ],
     correct: 1,
-    explanation: "Two clear red flags: (1) The GRN is dated March 10 but the PO wasn't raised until March 15 — goods cannot be received before a PO exists. (2) The same officer who raised the PO also approved the invoice — a segregation of duties violation."
+    explanation: "Two clear red flags: (1) The GRN is dated March 10 but the PO wasn't raised until March 15, goods cannot be received before a PO exists. (2) The same officer who raised the PO also approved the invoice, a segregation of duties violation."
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ export const quizData = [
   {
     id: 3,
     category: "Payments & Invoicing",
-    scenario: `An invoice for catering services worth ₦8,500,000 was submitted by Vendor A. A search of the payment register shows a near-identical invoice — same amount, same service description, same period — was paid to Vendor A exactly 30 days earlier. The current invoice has a different invoice number.`,
+    scenario: `An invoice for catering services worth ₦8,500,000 was submitted by Vendor A. A search of the payment register shows a near-identical invoice, same amount, same service description, same period, was paid to Vendor A exactly 30 days earlier. The current invoice has a different invoice number.`,
     question: "What type of fraud risk does this scenario represent?",
     options: [
       "Ghost vendor scheme",
@@ -48,9 +48,9 @@ export const quizData = [
     question: "What control failure does this highlight?",
     options: [
       "The contract value ceiling is too high",
-      "Scope creep — services billed outside contract scope",
+      "Scope creep: services billed outside contract scope",
       "The vendor is not pre-qualified for offshore work",
-      "There is no anomaly — contract value was not exceeded"
+      "There is no anomaly, contract value was not exceeded"
     ],
     correct: 1,
     explanation: "Passing a value threshold check does not mean a payment is valid. The invoice bills for services outside the contract's defined scope. This is scope creep — a common and often overlooked control gap where automated checks focus on amount but not on whether the service rendered matches what was contracted."
@@ -58,13 +58,13 @@ export const quizData = [
   {
     id: 5,
     category: "Inventory & Assets",
-    scenario: `A Long Lead Item (valve assembly) worth $280,000 was received and logged into the EAM system on April 2. A physical verification conducted on April 30 could not locate the item in the warehouse. The GRN was signed by a store officer who resigned on April 10. No incident report was filed.`,
+    scenario: `A Long Lead Item (valve assembly) worth $280,000 was received and logged into the EAM system on April 2. A physical verification conducted on April 30 could not locate the item in the warehouse. The Goods Receipt Note was signed by a store officer who resigned on April 10. No incident report was filed.`,
     question: "Which combination of risks is present here?",
     options: [
       "Inventory loss and inadequate access controls",
       "Fictitious receipt, possible misappropriation, and no incident reporting",
-      "Only a record-keeping error — items are often miscategorized",
-      "Vendor fraud — the item was never delivered"
+      "Only a record-keeping error, items are often miscategorized",
+      "Vendor fraud: the item was never delivered"
     ],
     correct: 1,
     explanation: "Multiple risks converge: the item may never have been received (fictitious GRN), or was received and misappropriated. The signing officer's quick resignation is a red flag. The failure to file an incident report when a $280,000 asset goes missing represents a serious control breakdown and possible concealment."
@@ -72,11 +72,11 @@ export const quizData = [
   {
     id: 6,
     category: "Pilotage & Marine Billing",
-    scenario: `A pilotage invoice covers services on June 14. The accompanying Vessel Traffic Verification Form (VTVF) shows the vessel departed port at 03:00 on June 14. The Pilotage Chit records the pilot boarding time as 07:30 on June 14 — over four hours after the vessel had already departed.`,
+    scenario: `A pilotage invoice covers services on June 14. The accompanying Vessel Traffic Verification Form (VTVF) shows the vessel departed port at 03:00 on June 14. The Pilotage Chit records the pilot boarding time as 07:30 on June 14, over 4 hours after the vessel had already departed.`,
     question: "What is the primary audit finding here?",
     options: [
       "The invoice date does not match the VTVF",
-      "The pilot boarded after the vessel had already departed — the service could not have been rendered",
+      "The pilot boarded after the vessel had already departed, the service could not have been rendered",
       "Pilotage chits are unreliable documents",
       "The departure time on the VTVF is a typographical error"
     ],
@@ -91,8 +91,8 @@ export const quizData = [
     options: [
       "Bid rigging with a conflict of interest",
       "Front company / shell vendor scheme",
-      "Both — conflict of interest and a potentially fictitious vendor",
-      "Nothing unusual — new companies can win contracts"
+      "Both, conflict of interest and a potentially fictitious vendor",
+      "Nothing unusual, new companies can win contracts"
     ],
     correct: 2,
     explanation: "Both red flags point to serious fraud risk: the shared address suggests the procurement officer has an undisclosed interest in the vendor (conflict of interest / self-dealing), while a vendor incorporated 2 weeks before the tender was issued suggests the company may have been created specifically to win this contract — a shell vendor scheme."
@@ -104,9 +104,9 @@ export const quizData = [
     question: "What should an auditor conclude?",
     options: [
       "The manager approved it, so it is valid",
-      "The hotel receipts are likely forged — fraudulent expense claim",
-      "The leave record and expense claim cannot both be accurate — further investigation required",
-      "The employee may have recovered quickly — no issue"
+      "The hotel receipts are likely forged, fraudulent expense claim",
+      "The leave record and expense claim cannot both be accurate, further investigation required",
+      "The employee may have recovered quickly, no issue"
     ],
     correct: 2,
     explanation: "An auditor does not jump to conclusions but identifies the irreconcilable conflict: an employee cannot be on approved sick leave and simultaneously travelling on company business. Both records cannot be accurate. This warrants investigation — potential fraud, record falsification, or a serious HR control failure. The manager's approval without query is a secondary finding."
@@ -117,7 +117,7 @@ export const quizData = [
     scenario: `End-of-quarter accounts show a ₦12,000,000 expense posted to 'Miscellaneous Repairs'. A review of the underlying transaction reveals it is the full cost of purchasing and installing a new generator set with a 10-year useful life. No fixed asset was created in the EAM system.`,
     question: "What is the accounting and audit risk here?",
     options: [
-      "Revenue expenditure has been incorrectly expensed — no risk",
+      "Revenue expenditure has been incorrectly expensed, no risk",
       "Capital expenditure has been misclassified as operating expense, understating assets and overstating costs",
       "The generator should have been split across multiple cost codes",
       "This is only a risk if the amount exceeds the capitalisation threshold"
@@ -131,12 +131,12 @@ export const quizData = [
     scenario: `A system audit of the ERP shows that a finance officer who was transferred to a different department 6 months ago still has full payment approval rights in the system. Last month, three payments totalling ₦34,000,000 were approved using her credentials. She claims she was unaware her access was never revoked.`,
     question: "What control failures are present?",
     options: [
-      "Only an IT oversight — access was not revoked on transfer",
+      "Only an IT oversight, access was not revoked on transfer",
       "Excessive access rights and potentially unauthorised payments",
       "Access control failure, potential unauthorised transactions, and inadequate user access review process",
-      "No failure — the employee is still with the company"
+      "No failure: the employee is still with the company"
     ],
     correct: 2,
-    explanation: "Three control failures stack up: (1) access was not revoked upon role change — a basic joiner/mover/leaver process failure; (2) no periodic user access review was conducted to catch the orphaned rights; (3) ₦34,000,000 in payments approved by someone with no business need for that access represents potentially unauthorised transactions requiring investigation, regardless of intent."
+    explanation: "Three control failures stack up: (1) access was not revoked upon role change, a basic joiner/mover/leaver process failure; (2) no periodic user access review was conducted to catch the orphaned rights; (3) ₦34,000,000 in payments approved by someone with no business need for that access represents potentially unauthorised transactions requiring investigation, regardless of intent."
   }
 ]

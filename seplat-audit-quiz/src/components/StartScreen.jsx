@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { AlertCircle } from "lucide-react";
 
 export default function StartScreen({ onStart }) {
   const [name, setName] = useState("");
   const [dept, setDept] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({ name: "", dept: "" });
 
   const handleStart = () => {
-    if (!name.trim()) { setError("Please enter your name."); return; }
-    if (!dept.trim()) { setError("Please enter your department."); return; }
+    const newErrors = { name: "", dept: "" };
+    if (!name.trim()) newErrors.name = "Please enter your full name.";
+    if (!dept.trim()) newErrors.dept = "Please enter your department.";
+    if (newErrors.name || newErrors.dept) { setErrors(newErrors); return; }
     onStart(name.trim(), dept.trim());
   };
 
@@ -29,37 +32,53 @@ export default function StartScreen({ onStart }) {
           Please provide your details to proceed with the audit.
         </p>
 
-        <div className="w-full text-left mb-5">
+        {/* Full Name */}
+        <div className="w-full text-left mb-5 relative">
           <label className="block text-[10px] font-semibold tracking-widest uppercase text-slate-400 mb-2">
             Full Name
           </label>
-          <input
-            type="text"
-            placeholder="e.g. John Doe"
-            value={name}
-            onChange={e => { setName(e.target.value); setError(""); }}
-            onKeyDown={e => e.key === "Enter" && handleStart()}
-            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 outline-none focus:border-green-600 focus:bg-white transition-colors placeholder:text-slate-400"
-          />
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="e.g. John Doe"
+              value={name}
+              onChange={e => { setName(e.target.value); setErrors(p => ({ ...p, name: "" })); }}
+              onKeyDown={e => e.key === "Enter" && handleStart()}
+              className={`w-full bg-slate-50 rounded-lg px-4 py-3 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 border ${errors.name ? "border-red-400" : "border-slate-200 focus:border-green-600"}`}
+            />
+            {errors.name && (
+              <div className="absolute left-0 -bottom-9 z-10 flex items-center gap-1.5 bg-red-50 border border-red-200 text-red-600 text-[11px] font-medium px-3 py-1.5 rounded-lg shadow-sm w-full">
+                <AlertCircle size={12} strokeWidth={2.5} className="flex-shrink-0" />
+                {errors.name}
+                <div className="absolute -top-1.5 left-4 w-3 h-3 bg-red-50 border-l border-t border-red-200 rotate-45" />
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className="w-full text-left mb-8">
+        {/* Department */}
+        <div className="w-full text-left mb-8 relative">
           <label className="block text-[10px] font-semibold tracking-widest uppercase text-slate-400 mb-2">
             Department
           </label>
-          <input
-            type="text"
-            placeholder="e.g. Finance, HR, IT"
-            value={dept}
-            onChange={e => { setDept(e.target.value); setError(""); }}
-            onKeyDown={e => e.key === "Enter" && handleStart()}
-            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-900 outline-none focus:border-green-600 focus:bg-white transition-colors placeholder:text-slate-400"
-          />
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="e.g. Finance, HR, IT"
+              value={dept}
+              onChange={e => { setDept(e.target.value); setErrors(p => ({ ...p, dept: "" })); }}
+              onKeyDown={e => e.key === "Enter" && handleStart()}
+              className={`w-full bg-slate-50 rounded-lg px-4 py-3 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 border ${errors.dept ? "border-red-400" : "border-slate-200 focus:border-green-600"}`}
+            />
+            {errors.dept && (
+              <div className="absolute left-0 -bottom-9 z-10 flex items-center gap-1.5 bg-red-50 border border-red-200 text-red-600 text-[11px] font-medium px-3 py-1.5 rounded-lg shadow-sm w-full">
+                <AlertCircle size={12} strokeWidth={2.5} className="flex-shrink-0" />
+                {errors.dept}
+                <div className="absolute -top-1.5 left-4 w-3 h-3 bg-red-50 border-l border-t border-red-200 rotate-45" />
+              </div>
+            )}
+          </div>
         </div>
-
-        {error && (
-          <p className="text-xs text-red-500 text-left w-full mb-4">{error}</p>
-        )}
 
         <button
           onClick={handleStart}
