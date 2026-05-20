@@ -7,6 +7,8 @@ import QuizCard from "./components/QuizCard";
 import DoneScreen from "./components/DoneScreen";
 import "./index.css";
 
+const SHEET_URL = import.meta.env.VITE_SHEET_URL || "";
+
 export default function App() {
   const [screen, setScreen] = useState("landing");
   const [user, setUser] = useState({ name: "", dept: "" });
@@ -45,11 +47,46 @@ export default function App() {
     setScreen("quiz");
   };
 
+  const formatTime = (s) => {
+    const m = Math.floor(s / 60).toString().padStart(2, "0");
+    const sec = (s % 60).toString().padStart(2, "0");
+    return `${m}:${sec}`;
+  };
+
+  const submitToSheet = async (score, total, time) => {
+    if (!SHEET_URL) {
+      console.warn("No SHEET_URL configured");
+      return;
+    }
+    console.log("Submitting to sheet:", { name: user.name, dept: user.dept, score: `${score}/${total}`, time: formatTime(time) });
+    try {
+      await fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: user.name,
+          dept: user.dept,
+          score: `${score}/${total}`,
+          time: formatTime(time)
+        })
+      });
+      console.log("Submitted successfully");
+    } catch (err) {
+      console.error("Submission failed:", err);
+    }
+  };
+
   const handleAnswer = (selectedIndex) => {
     const updated = [...answered, { question: current, selected: selectedIndex }];
     setAnswered(updated);
+
     if (updated.length >= quizData.length) {
       clearInterval(timerRef.current);
+      const score = updated.filter(
+        a => a.selected === quizData[a.question].correct
+      ).length;
+      submitToSheet(score, updated.length, elapsed);
       setScreen("done");
     } else {
       const answeredIdxs = updated.map(a => a.question);
@@ -61,12 +98,6 @@ export default function App() {
         setScreen("done");
       }
     }
-  };
-
-  const formatTime = (s) => {
-    const m = Math.floor(s / 60).toString().padStart(2, "0");
-    const sec = (s % 60).toString().padStart(2, "0");
-    return `${m}:${sec}`;
   };
 
   const progress = answered.length;
