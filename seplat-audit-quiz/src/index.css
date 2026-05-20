@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --color-audit-green: #16a34a;
+  --color-audit-emerald: #059669;
+  --color-audit-gold: #f59e0b;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased h-full;
+  }
+  html {
+    @apply h-full;
+  }
+}
+
+@keyframes heartbeat {
+  0%   { transform: scale(1); }
+  14%  { transform: scale(1.06); }
+  28%  { transform: scale(1); }
+  42%  { transform: scale(1.04); }
+  70%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
