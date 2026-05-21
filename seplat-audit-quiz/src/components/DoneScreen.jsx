@@ -29,8 +29,7 @@ export default function DoneScreen({ name, elapsed, formatTime }) {
         )}
 
         <p className="text-xs text-slate-500 leading-relaxed">
-          Scores are being tallied by the Internal Audit team.
-          Top performers will be announced at the end of Audit Week. Good luck!
+          Top performers will be announced at the end of Internal Audit Week. Good luck!
         </p>
 
         <div className="w-full h-px bg-slate-100" />

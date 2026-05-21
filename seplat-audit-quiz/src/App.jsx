@@ -8,7 +8,7 @@ import DoneScreen from "./components/DoneScreen";
 import "./index.css";
 
 const SHEET_URL = import.meta.env.VITE_SHEET_URL || "";
-const QUIZ_LOCKOUT_MS = 5 * 60 * 1000; // 5 minutes — change to 24 * 60 * 60 * 1000 for Audit Week
+const QUIZ_LOCKOUT_MS = 1 * 60 * 1000; // 5 minutes — change to 24 * 60 * 60 * 1000 for Audit Week
 
 export default function App() {
   const [screen, setScreen] = useState("landing");

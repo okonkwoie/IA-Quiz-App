@@ -21,7 +21,7 @@ export const quizData = [
     "options": [
       "The captain falsely certified that everything was fine",
       "The ship sailed with fewer crew than required",
-      "The ship's operating licence had expired",
+      "There is no critical problem at all",
       "All are equally serious problems"
     ],
     "correct": 3,
