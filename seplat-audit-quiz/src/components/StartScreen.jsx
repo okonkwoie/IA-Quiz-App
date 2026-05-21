@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AlertCircle } from "lucide-react";
 
-export default function StartScreen({ onStart }) {
+export default function StartScreen({ onStart, lockoutMsg }) {
   const [name, setName] = useState("");
   const [dept, setDept] = useState("");
   const [errors, setErrors] = useState({ name: "", dept: "" });
@@ -33,7 +33,7 @@ export default function StartScreen({ onStart }) {
         </p>
 
         {/* Full Name */}
-        <div className="w-full text-left mb-5 relative">
+        <div className="w-full text-left mb-8">
           <label className="block text-[10px] font-semibold tracking-widest uppercase text-slate-400 mb-2">
             Full Name
           </label>
@@ -44,11 +44,17 @@ export default function StartScreen({ onStart }) {
               value={name}
               onChange={e => { setName(e.target.value); setErrors(p => ({ ...p, name: "" })); }}
               onKeyDown={e => e.key === "Enter" && handleStart()}
-              className={`w-full bg-slate-50 rounded-lg px-4 py-3 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 border ${errors.name ? "border-red-400" : "border-slate-200 focus:border-green-600"}`}
+              className={`w-full bg-slate-50 rounded-lg px-4 py-3 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 border ${errors.name || lockoutMsg ? "border-red-400" : "border-slate-200 focus:border-green-600"}`}
             />
-            {errors.name && (
-              <div className="absolute left-0 -bottom-9 z-10 flex items-center gap-1.5 bg-red-50 border border-red-200 text-red-600 text-[11px] font-medium px-3 py-1.5 rounded-lg shadow-sm w-full">
-                <AlertCircle size={12} strokeWidth={2.5} className="flex-shrink-0" />
+            {lockoutMsg && (
+              <div className="absolute left-0 -bottom-8 z-10 flex items-center gap-1.5 bg-red-50 border border-red-200 text-red-500 text-[10px] font-medium px-3 py-1.5 rounded-lg shadow-sm w-full">
+                {lockoutMsg}
+                <div className="absolute -top-1.5 left-4 w-3 h-3 bg-red-50 border-l border-t border-red-200 rotate-45" />
+              </div>
+            )}
+            {errors.name && !lockoutMsg && (
+              <div className="absolute left-0 -bottom-8 z-10 flex items-center gap-1.5 bg-red-50 border border-red-200 text-red-500 text-[10px] font-medium px-3 py-1.5 rounded-lg shadow-sm w-full">
+                <AlertCircle size={11} strokeWidth={2.5} className="flex-shrink-0" />
                 {errors.name}
                 <div className="absolute -top-1.5 left-4 w-3 h-3 bg-red-50 border-l border-t border-red-200 rotate-45" />
               </div>
@@ -57,7 +63,7 @@ export default function StartScreen({ onStart }) {
         </div>
 
         {/* Department */}
-        <div className="w-full text-left mb-8 relative">
+        <div className="w-full text-left mb-8">
           <label className="block text-[10px] font-semibold tracking-widest uppercase text-slate-400 mb-2">
             Department
           </label>
@@ -71,8 +77,8 @@ export default function StartScreen({ onStart }) {
               className={`w-full bg-slate-50 rounded-lg px-4 py-3 text-sm text-slate-900 outline-none transition-colors placeholder:text-slate-400 border ${errors.dept ? "border-red-400" : "border-slate-200 focus:border-green-600"}`}
             />
             {errors.dept && (
-              <div className="absolute left-0 -bottom-9 z-10 flex items-center gap-1.5 bg-red-50 border border-red-200 text-red-600 text-[11px] font-medium px-3 py-1.5 rounded-lg shadow-sm w-full">
-                <AlertCircle size={12} strokeWidth={2.5} className="flex-shrink-0" />
+              <div className="absolute left-0 -bottom-8 z-10 flex items-center gap-1.5 bg-red-50 border border-red-200 text-red-500 text-[10px] font-medium px-3 py-1.5 rounded-lg shadow-sm w-full">
+                <AlertCircle size={11} strokeWidth={2.5} className="flex-shrink-0" />
                 {errors.dept}
                 <div className="absolute -top-1.5 left-4 w-3 h-3 bg-red-50 border-l border-t border-red-200 rotate-45" />
               </div>

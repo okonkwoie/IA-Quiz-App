@@ -1,6 +1,10 @@
 import { Trophy } from "lucide-react";
 
 export default function DoneScreen({ name, elapsed, formatTime }) {
+  const handleExit = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="h-[calc(100vh-56px)] bg-slate-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-md px-10 py-8 w-full max-w-sm text-center flex flex-col items-center gap-3">
@@ -41,6 +45,13 @@ export default function DoneScreen({ name, elapsed, formatTime }) {
           Thank you for participating in<br />
           <strong className="text-slate-500">Seplat Energy Internal Audit Week 2026</strong>
         </p>
+
+        <button
+          onClick={handleExit}
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold text-xs uppercase tracking-widest py-3 rounded-xl transition-all cursor-pointer mt-2"
+        >
+          Exit Quiz
+        </button>
 
       </div>
     </div>

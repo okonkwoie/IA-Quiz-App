@@ -8,6 +8,7 @@ import DoneScreen from "./components/DoneScreen";
 import "./index.css";
 
 const SHEET_URL = import.meta.env.VITE_SHEET_URL || "";
+const QUIZ_LOCKOUT_MS = 5 * 60 * 1000; // 5 minutes — change to 24 * 60 * 60 * 1000 for Audit Week
 
 export default function App() {
   const [screen, setScreen] = useState("landing");
@@ -16,6 +17,7 @@ export default function App() {
   const [answered, setAnswered] = useState([]);
   const [timerStarted, setTimerStarted] = useState(false);
   const [elapsed, setElapsed] = useState(0);
+  const [lockoutMsg, setLockoutMsg] = useState("");
   const timerRef = useRef(null);
 
   useEffect(() => {
@@ -34,6 +36,17 @@ export default function App() {
   const handleReady = () => setScreen("start");
 
   const handleStart = (name, dept) => {
+    const completedAt = localStorage.getItem("seplat_quiz_completed");
+    if (completedAt) {
+      const timeElapsed = Date.now() - parseInt(completedAt);
+      if (timeElapsed < QUIZ_LOCKOUT_MS) {
+        setLockoutMsg("You have already participated in this quiz. Thank you!");
+        return;
+      } else {
+        localStorage.removeItem("seplat_quiz_completed");
+      }
+    }
+    setLockoutMsg("");
     setUser({ name, dept });
     setAnswered([]);
     setTimerStarted(false);
@@ -54,11 +67,7 @@ export default function App() {
   };
 
   const submitToSheet = async (score, total, time) => {
-    if (!SHEET_URL) {
-      console.warn("No SHEET_URL configured");
-      return;
-    }
-    console.log("Submitting to sheet:", { name: user.name, dept: user.dept, score: `${score}/${total}`, time: formatTime(time) });
+    if (!SHEET_URL) { console.warn("No SHEET_URL configured"); return; }
     try {
       await fetch(SHEET_URL, {
         method: "POST",
@@ -80,12 +89,13 @@ export default function App() {
   const handleAnswer = (selectedIndex) => {
     const updated = [...answered, { question: current, selected: selectedIndex }];
     setAnswered(updated);
-
     if (updated.length >= quizData.length) {
       clearInterval(timerRef.current);
       const score = updated.filter(
         a => a.selected === quizData[a.question].correct
       ).length;
+      // Set lockout IMMEDIATELY before anything else
+      localStorage.setItem("seplat_quiz_completed", Date.now().toString());
       submitToSheet(score, updated.length, elapsed);
       setScreen("done");
     } else {
@@ -95,6 +105,7 @@ export default function App() {
         setCurrent(next);
         setScreen("quiz");
       } else {
+        localStorage.setItem("seplat_quiz_completed", Date.now().toString());
         setScreen("done");
       }
     }
@@ -104,7 +115,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-
       {screen !== "landing" && screen !== "start" && (
         <div className="fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-200 flex items-center justify-between px-6 z-50 shadow-sm">
           <img src="/seplat-logo.png" alt="Seplat Energy" className="h-11 object-contain" />
@@ -132,7 +142,9 @@ export default function App() {
       )}
 
       {screen === "landing" && <LandingScreen onReady={handleReady} />}
-      {screen === "start" && <StartScreen onStart={handleStart} />}
+      {screen === "start" && (
+        <StartScreen onStart={handleStart} lockoutMsg={lockoutMsg} />
+      )}
       {screen === "challenge" && (
         <div className="pt-14">
           <ChallengeSelect

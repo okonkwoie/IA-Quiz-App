@@ -31,7 +31,7 @@ export default function LandingScreen({ onReady }) {
           I'M READY
         </button>
 
-        <p className="text-xs text-slate-400">🏆 Amazing Prizes to be Won</p>
+        <p className="text-xs text-slate-400">🏆 Amazing Prizes to be Won!</p>
 
         <p className="text-[10px] text-slate-300 uppercase tracking-widest">
           © 2026 Internal Audit Department
