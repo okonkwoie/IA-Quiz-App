@@ -76,7 +76,7 @@ export default function LandingScreen({ onReady }) {
         />
 
         <h1 className="text-2xl font-black text-slate-900 tracking-tight leading-tight">
-          THINK LIKE AN{" "}
+          THINK LIKE A NEW{" "}
           <span
             className="text-green-600 inline-block"
             style={{ animation: "heartbeat 1.6s ease-in-out infinite" }}
@@ -86,7 +86,7 @@ export default function LandingScreen({ onReady }) {
         </h1>
 
         <p className="text-xs text-slate-500">
-          Think you can spot what others miss? 🤔
+          Can you can spot what others miss? 🤔
         </p>
 
         <button
