@@ -1,7 +1,8 @@
 export const quizData = [
   {
     type: "mcq",
-    scenario: "A disgruntled HR officer exports the entire company payroll report, including salaries, bank account numbers and performance ratings and shares it with colleagues via a WhatsApp group before resigning.",
+    topic: "CIA Triad",
+    scenario: "A disgruntled HR officer exports the entire company payroll report, including salaries, bank account numbers and shares it with colleagues via a WhatsApp group before resigning.",
     question: "Which element of the CIA Triad was violated?",
     options: [
       "Availability",
@@ -13,7 +14,8 @@ export const quizData = [
   },
   {
     type: "match",
-    question: "Match each transaction to the correct anomaly. Select a transaction, then select its match. Click on a matched pair to undo it. Goodluck!",
+    topic: "Spot the Control Failure",
+    question: "Match each transaction to its anomaly.",
     transactions: [
       { id: "t1", text: "PO raised March 15th. Goods received March 10th." },
       { id: "t2", text: "Invoice #44100 paid Feb 3rd 2026. Same invoice paid again Feb 17th 2026." },
@@ -29,6 +31,7 @@ export const quizData = [
   },
   {
     type: "mcq",
+    topic: "Audit Sampling",
     scenario: "During a Long Lead Item Audit, an auditor was given a spool containing a population of 2,347 casings and valves to test. Instead of testing all, the auditor selects only the casings and valves with a unit price above $100,000.",
     question: "Which sampling method has the auditor applied?",
     options: [

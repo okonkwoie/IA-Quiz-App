@@ -8,10 +8,9 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
   const [matches, setMatches] = useState({});
 
   const shuffledAnomalies = useMemo(() => {
-    return [...question.anomalies || []].sort(() => Math.random() - 0.5);
+    return [...(question.anomalies || [])].sort(() => Math.random() - 0.5);
   }, [question]);
 
-  // MCQ handlers
   const handleSelect = (idx) => {
     if (selected !== null) return;
     setSelected(idx);
@@ -28,7 +27,6 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
     setConfirming(false);
   };
 
-  // Match handlers
   const handleTransactionClick = (tid) => {
     if (matches[tid]) {
       const newMatches = { ...matches };
@@ -74,10 +72,7 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
     return question.transactions.map(t => {
       const matchedAid = matches[t.id];
       if (matchedAid) {
-        return {
-          anomaly: question.anomalies.find(a => a.id === matchedAid),
-          isPaired: true
-        };
+        return { anomaly: question.anomalies.find(a => a.id === matchedAid), isPaired: true };
       } else {
         const next = unmatchedPool[poolIdx++] || null;
         return { anomaly: next, isPaired: false };
