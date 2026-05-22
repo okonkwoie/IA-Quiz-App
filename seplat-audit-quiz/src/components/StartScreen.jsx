@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, SearchCheck } from "lucide-react";
 
 export default function StartScreen({ onStart, lockoutMsg }) {
   const [name, setName] = useState("");
@@ -15,8 +15,20 @@ export default function StartScreen({ onStart, lockoutMsg }) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-md p-10 w-full max-w-sm flex flex-col items-center text-center">
+    <div
+      className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
+      style={{
+        backgroundImage: "url('/detective-bg2.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat"
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-white/20 backdrop-blur-[0.2px]" />
+
+      {/* Card */}
+      <div className="relative z-10 bg-white/90 backdrop-blur-sm rounded-2xl shadow-md p-10 w-full max-w-sm flex flex-col items-center text-center">
 
         <img
           src="/seplat-logo.png"
@@ -24,12 +36,12 @@ export default function StartScreen({ onStart, lockoutMsg }) {
           className="h-14 object-contain mb-6"
         />
 
-        <h2 className="text-lg font-black tracking-wide text-slate-900 mb-1">
-          AUDITOR FOR A DAY
+        <h2 className="text-lg font-black tracking-wide text-slate-900 mb-1 flex items-center justify-center gap-2">
+            OUR AUDITOR OF THE DAY! 🕵️
         </h2>
 
         <p className="text-[11px] text-slate-400 mb-8">
-          Please provide your details to enable us track your winnings!
+          Please provide your <b>"auditor"</b> details to help us track your winnings!
         </p>
 
         {/* Full Name */}
