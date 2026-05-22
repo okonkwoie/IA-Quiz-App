@@ -1,55 +1,4 @@
-import { useEffect, useRef } from "react";
-
-const ICONS = ["📋", "🔍", "📊", "🧾", "💼", "🔒", "📁", "✅", "⚖️", "🖊️"];
-
 export default function LandingScreen({ onReady }) {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let animationId;
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resize();
-    window.addEventListener("resize", resize);
-
-    const particles = Array.from({ length: 18 }, (_, i) => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      icon: ICONS[i % ICONS.length],
-      size: 16 + Math.random() * 10,
-      speed: 0.3 + Math.random() * 0.4,
-      opacity: 0.06 + Math.random() * 0.08,
-    }));
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        ctx.font = `${p.size}px serif`;
-        ctx.globalAlpha = p.opacity;
-        ctx.fillText(p.icon, p.x, p.y);
-        p.x += p.speed;
-        if (p.x > canvas.width + 30) {
-          p.x = -30;
-          p.y = Math.random() * canvas.height;
-        }
-      });
-      ctx.globalAlpha = 1;
-      animationId = requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
@@ -60,13 +9,8 @@ export default function LandingScreen({ onReady }) {
         backgroundRepeat: "no-repeat"
       }}
     >
-      {/* Blur + white overlay */}
       <div className="absolute inset-0 bg-white/20 backdrop-blur-[4px]" />
 
-      {/* Animated background icons */}
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
-
-      {/* Card */}
       <div className="relative z-10 bg-white/90 backdrop-blur-sm rounded-2xl shadow-md p-10 w-full max-w-sm text-center flex flex-col items-center gap-4">
 
         <img
@@ -99,7 +43,7 @@ export default function LandingScreen({ onReady }) {
 
         <div className="flex items-center gap-2 text-xs text-slate-400">
           <span className="text-amber-500">🏆</span>
-          Amazing Prizes to be Won
+          Amazing Prizes to be Won!
         </div>
 
         <p className="text-[10px] text-slate-300 uppercase tracking-widest">
