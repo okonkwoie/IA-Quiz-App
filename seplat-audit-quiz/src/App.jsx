@@ -91,9 +91,14 @@ export default function App() {
     setAnswered(updated);
     if (updated.length >= quizData.length) {
       clearInterval(timerRef.current);
-      const score = updated.filter(
-        a => a.selected === quizData[a.question].correct
-      ).length;
+      const score = updated.filter(a => {
+      const q = quizData[a.question];
+    if (q.type === "mcq") {
+      return a.selected === q.correct;
+    }
+    // match, drag, spotlight, sequence all pass 1 for correct, 0 for wrong
+    return a.selected === 1;
+    }).length;
       // Set lockout IMMEDIATELY before anything else
       localStorage.setItem("seplat_quiz_completed", Date.now().toString());
       submitToSheet(score, updated.length, elapsed);
