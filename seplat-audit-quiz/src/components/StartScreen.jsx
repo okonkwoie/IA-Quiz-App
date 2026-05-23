@@ -37,7 +37,7 @@ export default function StartScreen({ onStart, lockoutMsg }) {
         />
 
         <h2 className="text-lg font-black tracking-wide text-slate-900 mb-1 flex items-center justify-center gap-2">
-            OUR AUDITOR OF THE DAY! 🕵️
+            AUDITOR FOR A DAY! 🕵️
         </h2>
 
         <p className="text-[11px] text-slate-400 mb-8">

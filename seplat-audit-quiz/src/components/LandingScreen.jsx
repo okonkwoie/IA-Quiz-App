@@ -30,7 +30,7 @@ export default function LandingScreen({ onReady }) {
         </h1>
 
         <p className="text-xs text-slate-500">
-          Can you can spot what others miss? 🤔
+          Can you spot what others miss? 🤔
         </p>
 
         <button
