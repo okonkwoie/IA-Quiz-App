@@ -89,6 +89,17 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
     setTimeout(() => onAnswer(correct === question.anomalies.length ? 1 : 0), 300);
   };
 
+  const handleGoBackMatch = () => {
+    const tids = Object.keys(matches);
+    if (tids.length > 0) {
+      const lastTid = tids[tids.length - 1];
+      const newMatches = { ...matches };
+      delete newMatches[lastTid];
+      setMatches(newMatches);
+    }
+    setConfirming(false);
+  };
+
   // Drag handlers
   const handleDragStart = (cardId) => setDraggedCard(cardId);
 
@@ -222,7 +233,6 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
           ))}
         </div>
 
-        {/* Floating drag preview */}
         {draggedSeqId && (
           <div
             className="fixed pointer-events-none z-50 bg-white border-2 border-green-400 rounded-xl px-4 py-3 shadow-xl text-xs text-slate-700 max-w-sm ring-2 ring-green-300"
@@ -303,40 +313,9 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
-            <div className="bg-slate-50 border-b border-slate-200 px-4 py-2">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                User Access Log — May 2024
-              </p>
-            </div>
-            <div className="relative w-full">
-              <img
-                src={question.image}
-                alt="User Access Log"
-                className="w-full object-contain"
-              />
-              {question.hotspots.map(spot => (
-                <div
-                  key={spot.id}
-                  onClick={() => {
-                    if (spotlightChoice) return;
-                    setSpotlightChoice(spot.id);
-                    setConfirming(true);
-                  }}
-                  className={`
-                    absolute left-[18%] right-0 h-[10%] cursor-pointer transition-all duration-150
-                    ${spotlightChoice === spot.id
-                      ? "bg-green-400/20 border-l-4 border-green-500"
-                      : "hover:bg-blue-400/10 hover:border-l-4 hover:border-blue-400"
-                    }
-                  `}
-                  style={{ top: spot.top }}
-                />
-              ))}
-            </div>
-          </div>
+        <div className="grid grid-cols-[1fr_2fr] gap-4 mb-6">
 
+          {/* Staff list first */}
           <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
             <div className="bg-slate-50 border-b border-slate-200 px-4 py-2">
               <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
@@ -366,6 +345,41 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
               </tbody>
             </table>
           </div>
+
+          {/* Image second and bigger */}
+          <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
+            <div className="bg-slate-50 border-b border-slate-200 px-4 py-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                123 Limited User Access Log — May 2026
+              </p>
+            </div>
+            <div className="relative w-full">
+              <img
+                src={question.image}
+                alt="User Access Log"
+                className="w-full object-contain"
+              />
+              {question.hotspots.map(spot => (
+                <div
+                  key={spot.id}
+                  onClick={() => {
+                    if (spotlightChoice) return;
+                    setSpotlightChoice(spot.id);
+                    setConfirming(true);
+                  }}
+                  className={`
+                    absolute left-[18%] right-0 h-[10%] cursor-pointer transition-all duration-150
+                    ${spotlightChoice === spot.id
+                      ? "bg-green-400/20 border-l-4 border-green-500"
+                      : "hover:bg-blue-400/10 hover:border-l-4 hover:border-blue-400"
+                    }
+                  `}
+                  style={{ top: spot.top }}
+                />
+              ))}
+            </div>
+          </div>
+
         </div>
 
         {confirming && (
@@ -613,7 +627,7 @@ export default function QuizCard({ question, questionNumber, total, onAnswer }) 
               </p>
               <div className="flex gap-3">
                 <button
-                  onClick={() => setConfirming(false)}
+                  onClick={handleGoBackMatch}
                   className="flex-1 border-2 border-slate-200 text-slate-600 font-bold text-xs uppercase tracking-widest py-3 rounded-xl hover:border-slate-300 transition-all cursor-pointer"
                 >
                   Go Back

@@ -17,7 +17,7 @@ export const quizData = [
     topic: "",
     question: "Match each transaction to its anomaly.",
     transactions: [
-      { id: "t1", text: "PO raised March 15th. Goods received March 10th." },
+      { id: "t1", text: "PO raised March 15th 2026. Goods received March 10th 2026." },
       { id: "t2", text: "Invoice #44100 paid Feb 3rd 2026. Same invoice paid again Feb 17th 2026." },
       { id: "t3", text: "Payment of ₦10M initiated and approved by the same officer." },
       { id: "t4", text: "₦50M contract awarded to one vendor. No waiver on file." },
@@ -45,7 +45,7 @@ export const quizData = [
   {
     type: "mcq",
     topic: "",
-    scenario: "A developer pushes a fix directly to a live production system without raising a change request. The fix works and no issues occur.",
+    scenario: "A production system goes down briefly during working hours and a developer applies a direct fix in production to restore service quickly. The system works again, but the change was not approved or logged anywhere.",
     question: "What control was bypassed?",
     options: [
       "Incident management",
@@ -71,26 +71,24 @@ export const quizData = [
       { id: "c5", text: "Contract compliance review", correctCategory: "cat2" },
       { id: "c6", text: "Payroll reconciliation", correctCategory: "cat2" },
     ]
-  }
-
-  ,{
+  },
+  {
     type: "mcq",
     topic: "",
-    scenario: "The Chief Audit Executive recently requested access to review all of the IT department's systems and data. The IT Director refused, stating that Internal Audit has no authority over IT systems.",
-    question: "What document should the Chief Audit Executive reference to resolve this dispute?",
+    scenario: "The Internal Audit department of a company has been operating for 3 years. The Chief Audit Executive recently requested access to review the IT department's systems and data. The IT Director refused, stating that Internal Audit has no authority over IT systems.",
+    question: "What document should the CAE reference to resolve this dispute?",
     options: [
       "The Company's IT policy",
       "The Audit Charter",
       "The External auditor's report",
-      "The ISO Standards"
+      "The IIA Standards"
     ],
     correct: 1
-  }
-
-  ,{
+  },
+  {
     type: "spotlight",
     topic: "",
-    question: "Review the information below and select the anomaly.",
+    question: "Thoroughly go through the active staff list and identify the anomaly on the user access log.",
     image: "/useraccess-log.png",
     hotspots: [
       { id: "j.smith",   label: "j.smith",   top: "43%" },
@@ -100,57 +98,54 @@ export const quizData = [
       { id: "s.lee",     label: "s.lee",     top: "83%" },
     ],
     staffList: {
-      title: "123 Limited (Active Staff List — May 2026)",
+      title: "123 Limited Active Staff List — May 2026",
       headers: ["Staff ID", "Name", "Department", "Status"],
       rows: [
-        ["EMP-001", "John Smith",  "Finance",    "Active"],
-        ["EMP-002", "Mary Okafor", "Procurement","Active"],
-        ["EMP-003", "Tom Brown",   "IT",         "Active"],
-        ["EMP-004", "Sarah Lee",   "HR",         "Active"],
+        ["EMP-001", "John Smith",  "Finance",     "Active"],
+        ["EMP-002", "Mary Okafor", "Procurement", "Active"],
+        ["EMP-003", "Tom Brown",   "IT",          "Active"],
+        ["EMP-004", "Sarah Lee",   "HR",          "Active"],
       ]
     },
     correct: "a.johnson"
-  }
-
-  ,{
+  },
+  {
     type: "mcq",
     topic: "",
-    scenario: "During a warehouse inventory update process, the IT system allowed a staff to input negative values (e.g., -20 units) without any warning or restriction.",
+    scenario: "During a warehouse inventory update process, the IT system allowed the inventory manager to input negative values (e.g., -20 units) without any warning or restriction.",
     question: "What is the most likely control weakness in this system?",
     options: [
       "Network Control",
-      "Input Validation Control",
+      "Input validation Control",
       "Backup Control",
       "General IT Control"
     ],
     correct: 1
-  }
-
-  ,{
+  },
+  {
     type: "mcq",
     topic: "",
-    scenario: "A key control is missing in a process. However, another control has been put in place to reduce the risk to an acceptable level.",
+    scenario: "In a follow-up audit, management has implemented corrective actions after previous audit findings were raised. The auditor is now reviewing whether the agreed actions have been properly implemented and are effectively resolving the issues identified.",
     question: "What is this additional control called?",
     options: [
-      "Immersive controls",
-      "Compensating controls",
-      "Detective controls",
-      "Preventive controls"
+      "Re-perform the original audit in full",
+      "Confirm whether audit findings have been adequately remediated",
+      "Assign new audit ratings to the department",
+      "Identify unrelated control weaknesses"
     ],
     correct: 1
-  }
-
-  ,{
+  },
+  {
     type: "sequence",
     topic: "",
-    question: "You are assigned an internal audit engagement. Arrange the following steps in the correct order for kicking off the audit.",
+    question: "You are a new auditor assigned to perform a user access audit on 123 Limited's IT System. For your learning, your manager asks you what you think the audit lifecycle sequence should be. Show your manager you are no newbie!",
     items: [
-      { id: "s1", text: "Formal engagement initiation based on approved audit plan", order: 1 },
-      { id: "s2", text: "Review audit charter and confirm scope", order: 2 },
-      { id: "s3", text: "Perform preliminary risk assessment", order: 3 },
-      { id: "s4", text: "Develop audit objectives and audit program", order: 4 },
-      { id: "s5", text: "Hold opening meeting with management", order: 5 },
-      { id: "s6", text: "Conduct walkthrough with process owners", order: 6 },
+      { id: "s1", text: "Audit Planning", order: 1 },
+      { id: "s2", text: "Risk Assessment", order: 2 },
+      { id: "s3", text: "Audit Program Development", order: 3 },
+      { id: "s4", text: "Fieldwork / Testing", order: 4 },
+      { id: "s5", text: "Reporting", order: 5 },
+      { id: "s6", text: "Remediation / Follow-up", order: 6 },
     ]
   }
 ];
